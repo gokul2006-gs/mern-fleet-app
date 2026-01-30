@@ -1,0 +1,14 @@
+{
+    "name": "mern-login-root",
+    "version": "1.0.0",
+    "description": "Root package.json to run both frontend and backend",
+    "scripts": {
+        "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+        "server": "cd backend && npm run dev",
+        "client": "cd frontend && npm run dev",
+        "dev": "concurrently \"npm run server\" \"npm run client\""
+    },
+    "dependencies": {
+        "concurrently": "^8.2.2"
+    }
+}
