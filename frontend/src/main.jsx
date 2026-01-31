@@ -3,26 +3,16 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import axios from 'axios';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
-import axios from 'axios';
-
-// Set the base URL for axios requests
-// Logic: 
-// 1. If we are in PROD, use VITE_API_URL. 
-// 2. If VITE_API_URL is missing in PROD, fallback to the hardcoded Render URL (failsafe).
-// 3. If we are in DEV (localhost), use "" to use the Vite proxy.
-const outputBackendUrl = import.meta.env.VITE_API_URL || "https://mern-fleet-app.onrender.com";
-
+// Force usage of Render URL in production to prevent 405 errors
 if (import.meta.env.PROD) {
-  axios.defaults.baseURL = outputBackendUrl;
+  axios.defaults.baseURL = "https://mern-fleet-app.onrender.com";
 } else {
   axios.defaults.baseURL = ""; // Use proxy in dev
 }
 
-console.log("Current Mode:", import.meta.env.MODE);
-console.log("Axios Base URL:", axios.defaults.baseURL);
-
-import { GoogleOAuthProvider } from '@react-oauth/google';
+console.log("Axios Base URL Set To:", axios.defaults.baseURL);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
